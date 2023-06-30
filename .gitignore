@@ -1,168 +1,24 @@
-import java.util.*;
-public class Main {
-static Scanner sc=new Scanner(System.in);
-   static int SavingsAmt=0, CheckingAmt=0;
-static int pass=0;
-static int historySav[]=new int[100], nosHS=0;
-static int historyCheck[]=new int[100], nosHC=0;
+# Compiled class file
+*.class
 
-public static void NewID(){
-   System.out.println("Enter your new pincode:");
-   int pa=sc.nextInt();
-   pass = pa;
-   System.out.println("Enter Initial amount in your Savings: ");
-   int sav=sc.nextInt();
-   SavingsAmt=sav;
-}
+# Log file
+*.log
 
-public static int Security(){
-   System.out.println("Enter your Pin CODE:");
-   int entpass=sc.nextInt();
-   return entpass;
-}
-public static void withdrawCash(){
+# BlueJ files
+*.ctxt
 
-   System.out.println("-----------------------------------------------------------------------------------------------------------");   
-   System.out.println("1>> Checking Account \n2>> Savings Account\n3>> Back");
-System.out.println("-----------------------------------------------------------------------------------------------------------");   
- 
-   int option=sc.nextInt();int a;
-System.out.println("-----------------------------------------------------------------------------------------------------------");   
-   switch(option){
- case 2:       
-   System.out.println("Enter the amount you want to with draw \n Remember the amount must in multiple of 500");
-   a=sc.nextInt();
-System.out.println("-----------------------------------------------------------------------------------------------------------");
-if(Security()==pass)   
-if(a<=SavingsAmt && a>0)
-   if(a%500==0){
-   SavingsAmt=SavingsAmt-a;
-   historySav[nosHS]=-a ;nosHS++;
-   System.out.println("\n Transaction Successfull! \n Please collect your cash");}
-   else 
-   System.out.println("The amount entered is not in multiple of 500");
-   else
-   System.out.println("Either Your Bank Balance is less then the amount asked for or you have entered a negative value");
-   else 
-   System.out.println("Your Pin Code is Wrong \n Try Again");
- break;
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
 
-case 1: 
-   System.out.println("Enter the amount you want to with draw \n Remember the amount must in multiple of 500");
-   a=sc.nextInt();
-   if(Security()==pass)  
-   if(a<=CheckingAmt && a>0)
-   if(a%500==0){
-   CheckingAmt=CheckingAmt-a; 
-   historyCheck[nosHC]=-a ;nosHC++;
-   System.out.println("\n Transaction Successfull! \n Please collect your cash");}
-   else 
-   System.out.println("The amount entered is not in multiple of 500");
-   else
-   System.out.println("Either Your Checking Balance is less then the amount asked for or you have entered a negative value");
-   else 
-   System.out.println("Your Pin Code is Wrong \n Try Again");
-break;   
-default:
-break;
-   }
-System.out.println("-----------------------------------------------------------------------------------------------------------");   
-}
-public static void DepositingMoney(){
-   int a;
-   System.out.println("Enter the amount you want to deposit\n ");
-   a=sc.nextInt();
-   if(Security()==pass) 
-   if(a>0){System.out.println("Transaction Successfull");
-   SavingsAmt+=a;
-   historySav[nosHS]=a ;nosHS++;
-}
-else 
-   System.out.println("Your Pin Code is Wrong \n Try Again");
-}
-public static void ShowBalance(){
-   if(Security()==pass){
-   System.out.println("Your Savings is : "+SavingsAmt);
-   System.out.println("Your Checking Account : "+CheckingAmt);}
-   else 
-   System.out.println("Your Pin Code is Wrong \n Try Again");
-}
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
 
-public static void TransferringFunds(){
-   
-   System.out.println("-----------------------------------------------------------------------------------------------------------");
-   System.out.println("Enter the amount you want to transfer to Checking acount");
-   int a= sc.nextInt();
-   System.out.println("-----------------------------------------------------------------------------------------------------------");
-   if(Security()==pass)
-   if(a>0 && a<=SavingsAmt){
-   CheckingAmt+=a;historyCheck[nosHC]=+a ;nosHC++;
-   SavingsAmt-=a;historySav[nosHS]=-a ;nosHS++;
-   System.out.println("Transaction Successfull!");
-}
-   else
-   System.out.println("Transaction Failed! Check your balance and amount entered");
-   else 
-   System.out.println("Your Pin Code is Wrong \n Try Again");
-}
-
-public static void TransactionHistory(){
-   System.out.println("-----------------------------------------------------------------------------------------------------------");   
-   System.out.println("1>> Checking Account \n2>> Savings Account\n3>> Back");
-System.out.println("-----------------------------------------------------------------------------------------------------------"); 
-   
-   int option=sc.nextInt();int a;
-   switch(option){
-      case 1: 
-      for(int i=0;i<nosHC;i++)
-      if(Security()==pass)
-      if( historyCheck[i]>=0)
-      System.out.println("Your Savings account has been credited by :"+ historyCheck[i]);
-      else
-      System.out.println("Your Savings account has been debited by :"+ historyCheck[i]*-1);
-      else 
-      System.out.println("Your Pin Code is Wrong \n Try Again");
-      break;
-
-      case 2:
-      if(Security()==pass)
-      for(int i=0;i<nosHS;i++)
-      if( historySav[i]>=0)
-      System.out.println("Your Savings account has been credited by :"+ historySav[i]);
-      else
-      System.out.println("Your Savings account has been debited by :"+ historySav[i]*-1);
-      else 
-      System.out.println("Your Pin Code is Wrong \n Try Again");
-      break;
-      default:
-      break;
-   }
-}
-   public static void main(String[] args){
-   System.out.println("Before entering the ATM please create your Bank ID For better visualization ");
-   NewID();
-System.out.println("-----------------------------------------------------------------------------------------------------------");
-System.out.println("Welcome to STS Bank \n Please select an option \n \n");
-int op;
-do{
-System.out.println(
-      "1>>Withdrawing cash\r\n" +
-      "2>>Balance inquiries\r\n" + 
-      "3>>Transferring funds\r\n" + 
-      "4>>Depositing money\r\n" + 
-      "5>>Access to transaction history\r\n"+
-      "6>>Exit");
-System.out.println("Enter your choice");
-
-    op=sc.nextInt();
-System.out.println("-----------------------------------------------------------------------------------------------------------");   
-
-switch(op){
-   case 1: withdrawCash(); break;
-   case 2: ShowBalance(); break;
-   case 3: TransferringFunds();break;
-   case 4: DepositingMoney();break;
-   case 5: TransactionHistory(); break;}
-}while(op!=6);
-  }
-   } 
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+replay_pid*
